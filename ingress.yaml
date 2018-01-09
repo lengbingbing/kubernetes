@@ -1,0 +1,15 @@
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test17
+spec:
+  rules:
+  - host: eureka-server.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: server-17
+          servicePort: 4000
+

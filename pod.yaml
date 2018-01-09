@@ -1,0 +1,11 @@
+apiVersion: v1  
+kind: Pod  
+metadata:  
+   name: eureka-server-3  
+   labels:   
+     name: eureka-server-3  
+spec:  
+  containers:  
+  - name: eureka-server-3   
+    image: hub.c.163.com/lengbing/k8s
+  
