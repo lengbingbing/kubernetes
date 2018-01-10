@@ -2,7 +2,8 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: test17
+  namespace: en-322
+  name: eureka-server
 spec:
   rules:
   - host: eureka-server.com
@@ -10,6 +11,6 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: server-17
+          serviceName: eureka-server
           servicePort: 4000
 
