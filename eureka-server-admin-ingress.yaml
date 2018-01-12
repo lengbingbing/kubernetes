@@ -1,0 +1,16 @@
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: en-322
+  name: eureka-server-api
+spec:
+  rules:
+  - host: eureka-server-api
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: server-api
+          servicePort: 4000
+

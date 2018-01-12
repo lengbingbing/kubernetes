@@ -3,33 +3,33 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: en-322
-  name: eureka-server
+  name: config-server
   labels:
-    app: eureka-server
+    app: config-server
 spec:
   ports:
   - port: 4000
-    name: eureka-server
+    name: config-server
   clusterIP: None
   selector:
-    app: eureka-server
+    app: config-server
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
   namespace: en-322
-  name: eureka-server
+  name: config-server
 spec:
-  serviceName: "eureka-server"
-  replicas: 3
+  serviceName: "config-server"
+  replicas: 1
   template:
     metadata:
       labels:
-        app: eureka-server
+        app: config-server
     spec:
       containers:
-      - name: eureka-server
-        image: hub.c.163.com/lengbing/k8s:eureka-server-0.5
+      - name: server-api
+        image: hub.c.163.com/lengbing/k8s:config-server-0.2
         ports:
         - containerPort: 4000
-          name: eureka-server
+          name: config-server
