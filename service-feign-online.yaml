@@ -3,33 +3,33 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: en-322
-  name: config-server
+  name: service-feign
   labels:
-    app: config-server
+    app: service-feign
 spec:
   ports:
   - port: 4000
-    name: config-server
+    name: service-feign
   clusterIP: None
   selector:
-    app: config-server
+    app: service-feign
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
   namespace: en-322
-  name: config-server
+  name: service-feign
 spec:
-  serviceName: "config-server"
+  serviceName: "service-feign"
   replicas: 1
   template:
     metadata:
       labels:
-        app: config-server
+        app: service-feign
     spec:
       containers:
-      - name: server-api
-        image: thub.autohome.com.cn/user_group/eureka-server:0.5
+      - name: service-feign
+        image: hub.c.163.com/lengbing/k8s:service-feign-0.2
         ports:
         - containerPort: 4000
-          name: config-server
+          name: service-feign

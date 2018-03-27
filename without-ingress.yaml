@@ -1,0 +1,16 @@
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: en-322
+  name: kafka-service
+spec:
+  rules:
+  - host: kafka-service
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: zuul
+          servicePort: 80
+

@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: eureka-server
-        image: hub.c.163.com/lengbing/k8s:eureka-server-0.5
+        image: thub.autohome.com.cn/user_group/eureka-server:0.5
         ports:
         - containerPort: 4000
           name: eureka-server

@@ -1,0 +1,16 @@
+# pv.yaml
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: consul-agnet-0
+  # namespace: en-322
+  labels:
+    type: local
+spec:
+  storageClassName: default
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp/data/pv0"

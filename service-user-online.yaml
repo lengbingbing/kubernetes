@@ -3,33 +3,33 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: en-322
-  name: config-server
+  name: service-user
   labels:
-    app: config-server
+    app: service-user
 spec:
   ports:
   - port: 4000
-    name: config-server
+    name: service-user
   clusterIP: None
   selector:
-    app: config-server
+    app: service-user
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
   namespace: en-322
-  name: config-server
+  name: service-user
 spec:
-  serviceName: "config-server"
+  serviceName: "service-user"
   replicas: 1
   template:
     metadata:
       labels:
-        app: config-server
+        app: service-user
     spec:
       containers:
-      - name: server-api
-        image: thub.autohome.com.cn/user_group/eureka-server:0.5
+      - name: service-user
+        image: hub.c.163.com/lengbing/k8s:service-user-0.2
         ports:
         - containerPort: 4000
-          name: config-server
+          name: service-user

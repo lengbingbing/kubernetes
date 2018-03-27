@@ -3,33 +3,33 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: en-322
-  name: config-server
+  name: rzc
   labels:
-    app: config-server
+    app: rzc
 spec:
   ports:
   - port: 4000
-    name: config-server
+    name: rzc
   clusterIP: None
   selector:
-    app: config-server
+    app: rzc
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
   namespace: en-322
-  name: config-server
+  name: rzc
 spec:
-  serviceName: "config-server"
+  serviceName: "rzc"
   replicas: 1
   template:
     metadata:
       labels:
-        app: config-server
+        app: rzc
     spec:
       containers:
-      - name: server-api
-        image: thub.autohome.com.cn/user_group/eureka-server:0.5
+      - name: rzc
+        image: hub.c.163.com/lengbing/k8s:rzc-0.2
         ports:
         - containerPort: 4000
-          name: config-server
+          name: rzc

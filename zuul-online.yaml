@@ -33,3 +33,5 @@ spec:
         ports:
         - containerPort: 4000
           name: zuul
+
+

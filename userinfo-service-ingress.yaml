@@ -1,0 +1,16 @@
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: en-322
+  name: test-userinfo
+spec:
+  rules:
+  - host: userinfo.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: userinfo
+          servicePort: 4000
+

@@ -1,0 +1,11 @@
+{
+  "data_dir": "/data/consul/data/",
+  "enable_script_checks": true,
+  "retry_join": ["10.23.27.87"],
+  "retry_interval": "30s",
+  "rejoin_after_leave": true,
+  "start_join": ["10.23.27.87"],
+  "server": true,
+  "bootstrap_expect": 3,
+  "ui":true
+}

@@ -1,0 +1,16 @@
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: en-322
+  name: service-user
+spec:
+  rules:
+  - host: service-user.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: service-user
+          servicePort: 4000
+

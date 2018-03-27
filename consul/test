@@ -1,0 +1,171 @@
+
+Server
+ consul agent -server -bootstrap-expect 2 -data-dir /tmp/consul -node=164 -config-dir /etc/consul.d -client 0.0.0.0 -ui
+ consul agent -server -data-dir /tmp/consul -node=54 -config-dir /etc/consul.d -client 0.0.0.0 -ui -bind 10.168.99.54 -join 10.168.100.164
+
+Client
+ consul agent -data-dir /tmp/consul -node=lb -join 10.168.100.164
+
+Server
+
+  consul agent -server -bootstrap-expect 2 -data-dir /tmp/consul -node=107 -config-dir /etc/consul.d -client 0.0.0.0 -ui -datacenter=dc2
+  consul agent -server -data-dir /tmp/consul -node=108 -config-dir /etc/consul.d -client 0.0.0.0 -ui -bind 10.168.99.108 -join 10.168.99.107 -ui -datacenter=dc2
+
+
+2个数据中心
+  consul join -wan 10.168.100.164 10.168.99.54 
+
+
+
+ consul agent -server -bootstrap-expect 1 -data-dir /tmp/consul -node=164 -client 0.0.0.0 -ui
+
+
+
+ consul agent -server -bootstrap-expect 2 -data-dir /tmp/consul -node=164 -config-dir /etc/consul.d -client 0.0.0.0 -ui -datacenter=test
+ consul agent -server -bootstrap-expect 2 -data-dir /tmp/consul -node=554 -config-dir /etc/consul.d -client 0.0.0.0 -ui -datacenter=test -bind 10.168.99.54 
+
+
+ consul agent -server -data-dir /tmp/consul -node=54 -config-dir /etc/consul.d -client 0.0.0.0 -ui -bind 10.168.99.54 -join 10.168.100.164
+
+
+ cfssl gencert \
+  -ca=ca.pem \
+  -ca-key=ca-key.pem \
+  -config=ca/ca-config.json \
+  -profile=default \
+  ca/consul-csr.json | cfssljson -bare consul
+
+
+  kubectl create -f statefulsets/consul_agent_rc.yaml
+
+   consul agent -dev -data-dir /tmp/consul -node=164 -config-dir /etc/consul.d -client 0.0.0.0 -ui
+
+
+   $(POD_IP)
+
+    consul agent -server -data-dir /tmp/consul -node=lb  -client 0.0.0.0 -ui -join 10.168.100.164 -datacenter=dc1  -bind 10.168.31.66
+
+    后台启动 consul
+	nohup consul agent -config-dir=/etc/consul.d > /data/consul/data/consul.log &
+
+	nohup consul agent -client 0.0.0.0 -ui -config-dir=/etc/consul.d > /data/consul/data/consul.log &
+   
+   Dns 访问服务
+   dig @10.23.27.87 -p 8600 consul-client-new.service.consul
+
+   telnet 10.23.27.87 8500
+
+
+
+
+       <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-consul-dependencies</artifactId>
+                <version>1.0.1.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+        </dependency>
+
+
+# 优先级高于application.yml(properties)配置
+# 配置中心相关设置必须在bootstrap.yml中
+
+#spring:
+#  cloud:
+#    config:
+#      profile: @profiles.active@  # profile
+#      label: master               # 分支
+#      discovery:
+#        enabled: true             # 通过eureka注册中心来发现配置实例（config-server实例）
+#        serviceId: config-server  # 要发现的配置实例名称
+
+
+
+server:
+  port: 7000
+management :
+  security :
+    enabled : false
+spring:
+    application:
+      name: uc-user-userinfo
+    cloud:
+        consul:
+          host: http://10.168.100.164
+          port: 8500
+          config :
+              enabled: false
+          discovery:
+              enabled: true
+              register: true
+        config:
+            name: uc-user-userinfo
+            failFast: true
+            profile: default
+            uri: http://uc-user-configserver.msapi.autohome.com.cn
+
+
+
+
+| 嘻嘻 | 哈哈 | 呵呵
+| :------------- :|:-------------:| :-----:|
+| 你好|我好|大家好 |
+| 是的| 是的 | 是的 |
+
+
+dig @127.0.0.1 -p 8600 uc-user-userinfo.service.consul
+
+dig @127.0.0.1 -p 8600 uc-user-userinfo.service.consul. A
+
+
+consul agent -client 0.0.0.0 -ui -config-dir=/etc/consul.d
+
+
+
+nohup consul agent -client 0.0.0.0 -ui -config-dir=/etc/consul.d > /data/consul/data/consul.log & 
+
+
+微服务,服务发现注册中心升级
+1.搭建Consul集群实现注册中心多数据中心
+2.普通服务注册中心改造成consul,注册及状态监控的问题
+3.开发快照备份恢复等相关程序
+
+保证consul集群长期稳定运行,深入理解consul的原理机制、完善灾备、故障转移、数据备份等相关流程，开发可用的相关插件
+能及时处理帮助接入业务方开发人员提出的相关问题，优化使用体验，完善使用流程
+按时完成相关开发工作、完成相关文档,wiki相关文档的编写
+
+OpenAp 外网管理平台的开发和优化
+1.优化微服务配置中心，升级配置中心，从consul 里读取数据配置，完善功能提升使用体验
+2.完善微服务状态监控，健康监测
+
+保证kong,Cassandra数据库集群稳定运行,完善kong的相关插件的二次开发，与spring cloud 等深入结合等相关开发工作
+极配合接入方、快速接入管控平台、优化用户体验
+按时完成相关开发工作
+
+
+OpenApi接口服务化
+1.将相关业务接口，转化成Spring Boot 形式的微服务化接口，接入OpenApi 管理平台
+
+
+微服务spring cloud相关组件持续优化，开发日志、调用链、追踪链等相关数据的统计分析功能，方便开发人员快速准确定位相关bug,提供程序效率性能
+保证接口在k8s中稳定运行，优化程序交付流程，简化、优化微服务使用流程
+按时完成相关开发工作
+
+
+
+
+
+
+
+
+
+

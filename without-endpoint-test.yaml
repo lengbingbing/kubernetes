@@ -1,0 +1,18 @@
+{
+    "kind": "Endpoints",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "kafka-service",
+        "namespace": "en-322"
+    },
+    "subsets": [
+        {
+            "addresses": [
+                { "ip": "10.168.100.164"},{ "ip": "10.168.100.164"}
+            ],
+            "ports": [
+                { "port": 9092 }
+            ]
+        }
+    ]
+}

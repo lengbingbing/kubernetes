@@ -3,33 +3,33 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: en-322
-  name: config-server
+  name: kafka
   labels:
-    app: config-server
+    app: kafka
 spec:
   ports:
   - port: 4000
-    name: config-server
+    name: kafka
   clusterIP: None
   selector:
-    app: config-server
+    app: kafka
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
   namespace: en-322
-  name: config-server
+  name: kafka
 spec:
-  serviceName: "config-server"
+  serviceName: "kafka"
   replicas: 1
   template:
     metadata:
       labels:
-        app: config-server
+        app: kafka
     spec:
       containers:
-      - name: server-api
-        image: thub.autohome.com.cn/user_group/eureka-server:0.5
+      - name: kafka
+        image: hub.c.163.com/lengbing/k8s:kafka
         ports:
         - containerPort: 4000
-          name: config-server
+          name: kafka

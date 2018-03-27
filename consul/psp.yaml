@@ -1,0 +1,48 @@
+# pv.yaml
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: consul-0
+  namespace: en-322
+  labels:
+    type: local
+spec:
+  storageClassName: default
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp/data/pv0"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: consul-1
+  namespace: en-322
+  labels:
+    type: local
+spec:
+  storageClassName: default
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp/data/pv1"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: consul-2
+  namespace: en-322
+  labels:
+    type: local
+spec:
+  storageClassName: default
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp/data/pv2"
