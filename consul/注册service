@@ -1,0 +1,21 @@
+http://10.23.27.87/v1/agent/service/register
+
+
+{
+  "ID": "10.23.26.2",
+  "Name": "openapi-lan-kong",
+  "Tags": [
+    "primary",
+    "v1"
+  ],
+  "Address": "10.23.26.2",
+  "Port": 80,
+  
+  "EnableTagOverride": false,
+  "Check": {
+
+    "TCP": "10.23.26.2:80",
+    "Interval": "10s"
+   
+  }
+}
